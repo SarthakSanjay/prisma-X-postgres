@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import express from 'express'
-import { createUser, createUserProfile, getAllUser, getAllUserProfile } from './one-to-one/one_to_one'
-import { createPost, createUser2 } from './one-to-one/one_to_many'
+import { createUser, createUserProfile, getAllUser, getAllUserProfile } from './controllers/one_to_one'
+import { createPost, createUser2 } from './controllers/one_to_many'
 
 const app = express()
 const prisma = new PrismaClient()
