@@ -28,3 +28,21 @@ export const createPost = async(req:Request , res:Response)=>{
         post
     })
 }
+
+export const getAllUser2 = async(req:Request, res:Response)=>{
+    const user = await prisma.user2.findMany()
+    res.status(200).json({
+        user
+    })
+}
+export const getAllPost = async(req:Request, res:Response)=>{
+    const post = await prisma.post.findMany({
+        select:{
+            author:true,
+            text:true
+        }
+    })
+    res.status(200).json({
+        post
+    })
+}
