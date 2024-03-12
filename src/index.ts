@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import express from 'express'
 import { createUser, createUserProfile, getAllUser, getAllUserProfile } from './controllers/one_to_one'
-import { createPost, createUser2 } from './controllers/one_to_many'
+import { createPost, createUser2, getAllPost, getAllUser2 } from './controllers/one_to_many'
 
 const app = express()
 const prisma = new PrismaClient()
@@ -16,6 +16,10 @@ app.get('/user/profile',getAllUserProfile)
 //one to many relationship
 app.post('/user2/create',createUser2)
 app.post('/user/post',createPost)
+app.get('/user2',getAllUser2)
+app.get('/post',getAllPost)
+
+
 
 const startServer = () =>{
     try {
