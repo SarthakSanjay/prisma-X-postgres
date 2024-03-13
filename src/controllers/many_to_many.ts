@@ -40,3 +40,17 @@ export const getAllCategory = async (req: Request, res: Response) => {
       category
     })
   }
+
+export const createCategoryOnTweets = async(req:Request, res:Response)=>{
+    const {tweetId,categoryId,assignedBy} = req.body
+    const cot = await prisma.categoriesOnTweets.create({
+        data:{
+            tweetId:tweetId,
+            categoryId:categoryId,
+            assignedBy:assignedBy
+        }
+    })
+    res.status(201).json({
+        msg:'created',cot
+    })
+}
