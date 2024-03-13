@@ -20,3 +20,23 @@ export const getAllTweets = async (req: Request, res: Response) => {
     tweet
   })
 }
+
+export const createCategory = async(req:Request , res:Response) =>{
+    const name = req.body.name
+    const category = await prisma.category.create({
+        data:{
+            name:name
+        }
+    })
+    res.status(201).json({
+        msg:"category created",
+        category
+    })
+}
+
+export const getAllCategory = async (req: Request, res: Response) => {
+    const category = await prisma.category.findMany()
+    res.status(201).json({
+      category
+    })
+  }
