@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import express from 'express'
 import { createUser, createUserProfile, getAllUser, getAllUserProfile } from './controllers/one_to_one'
 import { createPost, createUser2, getAllPost, getAllUser2 } from './controllers/one_to_many'
-import { combinedTweet, createCategory, createCategoryOnTweets, createTweet, getAllCategory, getAllCategoryOnTweet, getAllTweets } from './controllers/many_to_many'
+import { assignCategories, combinedTweet, createCategory, createCategoryOnTweets, createTweet, getAllCategory, getAllCategoryOnTweet, getAllTweets } from './controllers/many_to_many'
 
 const app = express()
 const prisma = new PrismaClient()
@@ -22,6 +22,7 @@ app.get('/post',getAllPost)
 
 //many to many relationships
 app.post('/tweet/combo', combinedTweet)
+app.post('/tweet/assign', assignCategories)
 app.post('/tweet',createTweet)
 app.get('/tweet',getAllTweets)
 app.post('/ctg',createCategory)
