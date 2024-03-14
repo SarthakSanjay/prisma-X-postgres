@@ -61,3 +61,31 @@ export const getAllCategoryOnTweet = async (req: Request, res: Response) => {
       cot
     })
   }
+
+export const combinedTweet = async(req:Request ,res:Response)=>{
+    const {title , assignedBy , category} = req.body
+   
+  const tweet = await prisma.tweet.create({
+    data: {
+      title: title,
+      categories: {
+        create: [
+          {
+            assignedBy: assignedBy,
+            assignedAt: new Date(),
+            category: {
+              create: {
+                name: category,
+              },
+            },
+          },
+        ],
+      },
+    },
+  })
+
+  res.status(201).json({
+    msg:"combined tweet",
+    tweet
+  })
+}
