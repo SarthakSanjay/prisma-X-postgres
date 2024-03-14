@@ -89,3 +89,42 @@ export const combinedTweet = async(req:Request ,res:Response)=>{
     tweet
   })
 }
+
+export const assignCategories = async(req:Request , res:Response) =>{
+    const {title , assignedBy} = req.body
+  try {
+     const tweet =  await prisma.tweet.create({
+      data: {
+        title: title,
+        categories: {
+          create: [
+            {
+              assignedBy:assignedBy,
+              assignedAt: new Date(),
+              category: {
+                connect: {
+                  id:1,
+                },
+              },
+            },
+            {
+              assignedBy: assignedBy,
+              assignedAt: new Date(),
+              category: {
+                connect: {
+                  id:2,
+                },
+              },
+            },
+          ],
+        },
+      },
+    })
+    res.status(201).json({
+      msg:'created tweet',
+      tweet
+    })
+  } catch (error:any) {
+    console.log(error.message);
+  }
+}
