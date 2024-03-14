@@ -69,3 +69,12 @@ model CategoriesOnTweets {
 
     @@id([tweetId, categoryId])
 }
+
+//self relations
+model Client {
+  id          Int     @id @default(autoincrement())
+  name        String?
+  successorId Int?    @unique
+  successor   Client?   @relation("BlogOwnerHistory", fields: [successorId], references: [id])
+  predecessor Client?   @relation("BlogOwnerHistory")
+}
