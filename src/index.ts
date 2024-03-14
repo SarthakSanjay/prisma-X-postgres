@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import express from 'express'
 import { createUser, createUserProfile, getAllUser, getAllUserProfile } from './controllers/one_to_one'
 import { createPost, createUser2, getAllPost, getAllUser2 } from './controllers/one_to_many'
-import { createCategory, createTweet, getAllCategory, getAllTweets } from './controllers/many_to_many'
+import { createCategory, createCategoryOnTweets, createTweet, getAllCategory, getAllCategoryOnTweet, getAllTweets } from './controllers/many_to_many'
 
 const app = express()
 const prisma = new PrismaClient()
@@ -25,6 +25,8 @@ app.post('/tweet',createTweet)
 app.get('/tweet',getAllTweets)
 app.post('/ctg',createCategory)
 app.get('/ctg',getAllCategory)
+app.post('/cot',createCategoryOnTweets)
+app.get('/cot',getAllCategoryOnTweet)
 
 const startServer = () =>{
     try {
