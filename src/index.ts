@@ -3,7 +3,7 @@ import express from 'express'
 import { createUser, createUserProfile, getAllUser, getAllUserProfile } from './controllers/one_to_one'
 import { createPost, createUser2, getAllPost, getAllUser2 } from './controllers/one_to_many'
 import { assignCategories, combinedTweet, createCategory, createCategoryOnTweets, createTweet, getAllCategory, getAllCategoryOnTweet, getAllTweets } from './controllers/many_to_many'
-import { createClient, getAllClients } from './controllers/self'
+import { createClient, createComment, getAllClients, getAllComment, getAllCommentOfComments } from './controllers/self'
 
 const app = express()
 const prisma = new PrismaClient()
@@ -34,7 +34,10 @@ app.get('/cot',getAllCategoryOnTweet)
 //self relations
 app.post('/client',createClient)
 app.get('/client',getAllClients)
-
+//comment using self relations
+app.post('/comment', createComment)
+app.get('/comment',getAllComment)
+app.get('/commentByID',getAllCommentOfComments)
 const startServer = () =>{
     try {
 
