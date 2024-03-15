@@ -78,3 +78,11 @@ model Client {
   successor   Client?   @relation("BlogOwnerHistory", fields: [successorId], references: [id])
   predecessor Client?   @relation("BlogOwnerHistory")
 }
+
+model Comment {
+  id              Int       @id @default(autoincrement())
+  text            String
+  parentId        Int?      // References the parent comment, if any
+  parent          Comment?  @relation("ChildComments", fields: [parentId], references: [id])
+  children        Comment[] @relation("ChildComments") // Represents the replies to this comment
+}
